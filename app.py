@@ -9,7 +9,7 @@ st.title("Heart Health Risk Estimator")
 
 tabs = st.tabs(['Single Prediction', 'CSV Upload', 'Model Performance'])
 
-# ------------- TAB 1: SINGLE PREDICTION ---------------
+
 with tabs[0]:
     st.header("Enter Patient Information")
 
@@ -26,7 +26,7 @@ with tabs[0]:
     st_depression = st.number_input("Oldpeak (ST Depression)", 0.0, 10.0)
     slope = st.selectbox("ST Slope", ["Upsloping", "Flat", "Downsloping"])
 
-    # Encode as per training
+
     gender = 0 if gender == "Male" else 1
     cp_type = ["Typical Angina", "Atypical Angina", "Non-Anginal Pain", "Asymptomatic"].index(cp_type)
     sugar = 1 if sugar == "> 120 mg/dl" else 0
@@ -34,7 +34,7 @@ with tabs[0]:
     angina = 1 if angina == "Yes" else 0
     slope = ["Upsloping", "Flat", "Downsloping"].index(slope)
 
-    # Correct column names to match training
+
     user_input = pd.DataFrame({
         'Age': [age],
         'Sex': [gender],
@@ -66,7 +66,6 @@ with tabs[0]:
         for name, result in zip(model_names, predictions):
             st.markdown(f"**{name}**: {'💓 Heart Disease Detected' if result else '✅ No Heart Disease'}")
 
-# ---------------- TAB 2: BULK PREDICTION ----------------
 with tabs[1]:
     st.header("Bulk Prediction via CSV Upload")
 
@@ -121,7 +120,6 @@ with tabs[1]:
     else:
         st.info("Awaiting CSV file...")
 
-# ---------------- TAB 3: MODEL PERFORMANCE ----------------
 with tabs[2]:
     st.header("Model Accuracy Comparison")
 
